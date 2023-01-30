@@ -12,3 +12,21 @@ Tässä sovelluksessa käyttäjä voi lisätä erilaisia kasveja ja niihin liitt
 - Ylläpitäjä voi uudelleen arvioida, kuinka paljon se tarvitsee aurinkoa ja vettä.
 - Ylläpitäjä voi poistaa käyttäjien annettuja kommentteja.
 - Ylläpitäjä voi luoda ryhmiä, joihin kasveja voi luokitella. Yksittäinen kasvi voi kuulua yhteen tai useampaan ryhmään.
+
+## Testausohjeet
+
+- Kloonaa tämä repositorio omalle koneellesi ja siirry sen juurikansioon. Luo kansioon .env-tiedosto ja määritä sen sisältö seuraavanlaiseksi:
+
+  - DATABASE_URL=postgresql:///user <br>
+  - SECRET_KEY=salainen-avain
+  
+- Seuraavaksi aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla:
+  - python3 -m venv venv
+  - source venv/bin/activate
+  - pip install -r ./requirements.txt
+  
+- Määritä vielä tietokannan skeema komennolla:
+  - psql < schema.sql
+  
+- Käynnistä sovelluksen komennolla:
+  - flask run
