@@ -1,0 +1,21 @@
+Nimi: {{ plant_name }} <br>
+Aurinko: {{ sun }} <br>
+Vesi: {{ water }} <br>
+ID: {{ id }} <br>
+<hr>
+
+{% for comment in comments %}
+<i>Kommentti:</i> {{ comment.content }}
+<p>
+    {% endfor %}
+<hr>
+
+<form action="/add" method="post">
+    <p>Kommentti: <br>
+        <textarea name="content" rows="4" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Lähetä">
+        <input type="hidden" name="plant_id" value="{{ id }}">
+</form>
+<hr>
+<a href="/front_page">Takaisin</a>

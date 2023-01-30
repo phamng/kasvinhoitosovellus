@@ -3,9 +3,18 @@ CREATE TABLE users (
     username TEXT UNIQUE,
     password TEXT
 );
-CREATE TABLE messages (
+
+CREATE TYPE amount AS ENUM ('Erittäin vähän', 'Vähän', 'Keskimäärin', 'Paljon', 'Erittäin paljon' );
+
+CREATE TABLE plants (
+    id SERIAL PRIMARY KEY,
+    plant_name TEXT,
+    sun amount,
+    water amount
+);
+
+CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     content TEXT,
-    user_id INTEGER REFERENCES users,
-    sent_at TIMESTAMP
+    plant_id INTEGER REFERENCES plants
 );

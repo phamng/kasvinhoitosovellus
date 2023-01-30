@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<h1>Lisää uusi kasvi</h1>
+
+<body>
+
+    <form action="/send" method="POST">
+        <input type="image" src="plant.png" width="25" height="25">
+        <input type="text" name="plant_name"> <br>
+
+        <input type="image" src="sun.png" width="30" height="30">
+        <input type="radio" name="sun" value="Erittäin vähän"> Erittäin vähän
+        <input type="radio" name="sun" value="Vähän"> Vähän
+        <input type="radio" name="sun" value="Keskimäärin"> Keskimäärin
+        <input type="radio" name="sun" value="Paljon"> Paljon
+        <input type="radio" name="sun" value="Erittäin paljon"> Erittäin paljon <br>
+
+        <input type="image" src="water.png" width="30" height="30">
+        <input type="radio" name="water" value="Erittäin vähän"> Erittäin vähän
+        <input type="radio" name="water" value="Vähän"> Vähän
+        <input type="radio" name="water" value="Keskimäärin"> Keskimäärin
+        <input type="radio" name="water" value="Paljon"> Paljon
+        <input type="radio" name="water" value="Erittäin paljon"> Erittäin paljon <br>
+
+        <p>Kommentti: <br>
+        <textarea name="content" rows="4" cols="50"></textarea> <br>
+        <input type="submit" value="Lähetä">
+        <input type="reset" value="Nollaa">
+    </form>
+</body>
+</html>
