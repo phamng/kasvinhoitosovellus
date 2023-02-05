@@ -1,7 +1,10 @@
+CREATE TYPE user_type AS ENUM ('user', 'administrator');
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username TEXT UNIQUE,
-    password TEXT
+    password TEXT,
+    type user_type
 );
 
 CREATE TYPE amount AS ENUM ('Erittäin vähän', 'Vähän', 'Keskimäärin', 'Paljon', 'Erittäin paljon' );

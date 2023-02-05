@@ -13,20 +13,20 @@
         <h1>Kasvien määrä: {{ count }}</h1>
         <style> .count { padding: 9px; color: white; background-color: #396039;}</style>
     </div>
-    <form action="/send" , method="post">
+    <form action="/remove", method="post">
         <div class="plants">
             {% for plant in plants %}
             Nimi: {{ plant.plant_name }} <br>
             Valon määrä: {{ plant.sun }} <br>
             Veden määrä: {{ plant.water }} <br>
-            <a href="/plant/{{ plant.id }}">Katso kaikki kommentit</a> <br>
+            <input type="hidden" name="plant_id" value="{{ plant.id }}">
+            <input type="submit" value="Poista"> <br>
             <hr>
             {% endfor %}
             <style> .plants { padding: 15px; background-color: #9fc69f;}</style>
         </div>
     </form>
     <div class="form-group col-50">
-        <a href="/new_plant" class="new">Lisää uusi kasvi</a>
         <a href="/logout" class="logout">Kirjaudu ulos</a>
         <style> .new, .logout { padding: 9px; color: white; background-color: #396039;}</style>
     </div>

@@ -48,3 +48,13 @@ def getComment(id):
     sql = "SELECT C.content FROM comments C WHERE C.plant_id=:id"
     result = db.session.execute(sql, {"id": id})
     return result.fetchall()
+
+
+def removePlant(id):
+    sql1 = "DELETE FROM comments WHERE plant_id=:id"
+    db.session.execute(sql1, {"id": id})
+    db.session.commit()
+    sql2 = "DELETE FROM plants WHERE id=:id"
+    db.session.execute(sql2, {"id": id})
+    db.session.commit()
+    return True

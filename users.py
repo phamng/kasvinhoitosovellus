@@ -15,8 +15,10 @@ def login(username, password):
         else:
             return False
 
+
 def logout():
     del session["user_id"]
+
 
 def register(username, password):
     hash_value = generate_password_hash(password)
@@ -27,6 +29,7 @@ def register(username, password):
     except:
         return False
     return login(username, password)
+
 
 def user_id():
     return session.get("user_id",0)

@@ -1,12 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
 <head>
-    <meta charset="UTF-8">
-    <title>Kasvinhoitosovllus</title>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<title>Kasvinhoitosovellus</title>
+<!--<link rel="stylesheet" type="text/css" href="style.css">-->
 </head>
+
+<style>body {background-color: #cfe2cf}</style>
 <body>
-    <h1>Tervetuloa kasvinhoitosovellukseen!</h1> <br>
-    <a href="/login">Kirjaudu sisään</a> <br>
-    <a href="/register">Luo uusi tunnus</a>
+<div class="container">
+    <style>
+    .container {
+      line-height: 1;
+      height: 90%;
+      background-color: #9fc69f;
+      margin: auto;
+      width: 100%;
+      padding: 150px;
+    }
+</style>
+    <div class="row">
+        <div class="col-8">
+            <h1>Tervetuloa kasvinhoitosovellukseen!</h1> <br>
+            <p>
+        </div>
+        <form action="/login" method="POST">
+            <div class="form-group col-15">
+                <label for="username">Käyttäjätunnus</label>
+                <input type="text" class="form-control" id="username" name="username">
+            </div>
+            <div class="form-group col-15">
+                <label for="password">Salanana</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="form-group col-15">
+                <input type="radio" class="form-control" id="user" name="user_type" value="user">Käyttäjä
+                <input type="radio" class="form-control" id="administrator" name="user_type" value="administrator">Ylläpitäjä
+            </div>
+            <div class="form-group col-15">
+                <button type="submit" class="btn">Kirjaudu</button>
+                <style> .btn { padding: 9px; color: white; background-color: #396039}</style>
+            </div>
+            <div class="form-group col-15">
+                <a href="/register" id="btn2">Luo uusi tili</a>
+                <style> #btn2 { color: #396039;}</style>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
-</html>

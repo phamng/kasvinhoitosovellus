@@ -8,11 +8,16 @@ def welcome():
     return render_template("welcome.html")
 
 
-@app.route("/front_page")
+@app.route("/user_page")
 def index():
     myList = plants.get_list()
     return render_template("index.html", count=len(myList), plants=myList)
 
+
+@app.route("/admin_page")
+def index2():
+    myList = plants.get_list()
+    return render_template("index2.html", count=len(myList), plants=myList)
 
 @app.route("/new_plant")
 def new():
@@ -24,9 +29,8 @@ def send():
     plant_name = request.form["plant_name"]
     sun = request.form["sun"]
     water = request.form["water"]
-    comment = request.form["content"]
     if plants.send(plant_name, sun, water):
-        return redirect("/front_page")
+        return redirect("/user_page")
     else:
         return render_template("error.html", message="Viestin lähetys ei onnistunut")
 
@@ -34,12 +38,15 @@ def send():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-        return render_template("login.html")
+        return render_template("welcome.html")
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if users.login(username, password):
-            return redirect("/front_page")
+        userType = request.form["user_type"]
+        if userType == "user" and users.login(username, password):
+            return redirect("/user_page")
+        elif userType == "administrator" and users.login(username, password):
+            return redirect("/admin_page")
         else:
             return render_template("error.html", message="Väärä tunnus tai salasana")
 
@@ -79,8 +86,16 @@ def result(id):
 def add():
     content = request.form["content"]
     plant_id = request.form["plant_id"]
-    if not content:
-        if plants.addComment(content, plant_id):
-            return redirect("/plant/" + str(plant_id))
+    if plants.addComment(content, plant_id):
+        return redirect("/plant/" + str(plant_id))
     else:
         return render_template("error.html", message="Kommentin lähetys ei onnistunut")
+
+
+@app.route("/remove", methods=["GET", "POST"])
+def remove():
+    plant_id = request.form["plant_id"]
+    if plants.removePlant(plant_id):
+        return redirect("/admin_page")
+    else:
+        return render_template("error.html", message="Kasvin poistaminen ei onnistunut")
