@@ -19,6 +19,11 @@ Tässä sovelluksessa käyttäjä voi lisätä erilaisia kasveja ja niihin liitt
 
   - DATABASE_URL=postgresql:///user <br>
   - SECRET_KEY=salainen-avain
+    - Oman salaisen avaimen voi luoda vaikkapa Python-tulkin avulla:
+    
+      python3 <br>
+      import secrets <br>
+      secrets.token_hex(16)
   
 - Seuraavaksi aktivoi virtuaaliympäristö ja asenna sovelluksen riippuvuudet komennoilla:
   - python3 -m venv venv
