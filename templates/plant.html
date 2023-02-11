@@ -16,6 +16,7 @@ ID: {{ id }} <br>
         <br>
         <input type="submit" value="Lähetä">
         <input type="hidden" name="plant_id" value="{{ id }}">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <hr>
-<a href="/front_page">Takaisin</a>
+<a href="/user_page">Takaisin etusivulle</a>

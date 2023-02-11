@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import plants, users
 
 
@@ -19,6 +19,7 @@ def index2():
     myList = plants.get_list()
     return render_template("index2.html", count=len(myList), plants=myList)
 
+
 @app.route("/new_plant")
 def new():
     return render_template("new_plant.html")
@@ -29,6 +30,8 @@ def send():
     plant_name = request.form["plant_name"]
     sun = request.form["sun"]
     water = request.form["water"]
+    if users.session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     if plants.send(plant_name, sun, water):
         return redirect("/user_page")
     else:
@@ -86,7 +89,10 @@ def result(id):
 def add():
     content = request.form["content"]
     plant_id = request.form["plant_id"]
-    if plants.add_comment(content, plant_id):
+    if users.session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+    if content != "":
+        plants.add_comment(content, plant_id)
         return redirect("/plant/" + str(plant_id))
     else:
         return render_template("error.html", message="Kommentin lähetys ei onnistunut")
@@ -95,6 +101,8 @@ def add():
 @app.route("/remove", methods=["GET", "POST"])
 def remove():
     plant_id = request.form["plant_id"]
+    if users.session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     if plants.remove_plant(plant_id):
         return redirect("/admin_page")
     else:

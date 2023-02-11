@@ -22,7 +22,9 @@
         <input type="radio" name="water" value="Erittäin paljon"> Erittäin paljon <br>
 
         <input type="submit" value="Lähetä">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="reset" value="Nollaa">
     </form>
+<a href="/user_page">Takaisin etusivulle</a>
 </body>
 </html>
