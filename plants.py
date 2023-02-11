@@ -10,19 +10,19 @@ def get_list():
     return result.fetchall()
 
 
-def get_plantName(id):
+def get_plant_name(id):
     sql = "SELECT plant_name FROM plants WHERE id=:id"
     result = db.session.execute(sql, {"id": id})
     return result.fetchone()[0]
 
 
-def get_plantSun(id):
+def get_plant_sun(id):
     sql = "SELECT sun FROM plants WHERE id=:id"
     result = db.session.execute(sql, {"id": id})
     return result.fetchone()[0]
 
 
-def get_plantWater(id):
+def get_plant_water(id):
     sql = "SELECT water FROM plants WHERE id=:id"
     result = db.session.execute(sql, {"id": id})
     return result.fetchone()[0]
@@ -37,20 +37,20 @@ def send(plant_name, sun, water):
     db.session.commit()
     return True
 
-def addComment(content, plant_id):
+def add_comment(content, plant_id):
     sql = "INSERT INTO comments (content, plant_id) VALUES (:content, :plant_id)"
     db.session.execute(sql, {"content": content, "plant_id": plant_id})
     db.session.commit()
     return True
 
 
-def getComment(id):
+def get_comment(id):
     sql = "SELECT C.content FROM comments C WHERE C.plant_id=:id"
     result = db.session.execute(sql, {"id": id})
     return result.fetchall()
 
 
-def removePlant(id):
+def remove_plant(id):
     sql1 = "DELETE FROM comments WHERE plant_id=:id"
     db.session.execute(sql1, {"id": id})
     db.session.commit()

@@ -42,10 +42,10 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        userType = request.form["user_type"]
-        if userType == "user" and users.login(username, password):
+        user_type = request.form["user_type"]
+        if user_type == "user" and users.login(username, password):
             return redirect("/user_page")
-        elif userType == "administrator" and users.login(username, password):
+        elif user_type == "administrator" and users.login(username, password):
             return redirect("/admin_page")
         else:
             return render_template("error.html", message="Väärä tunnus tai salasana")
@@ -75,10 +75,10 @@ def register():
 
 @app.route("/plant/<int:id>")
 def result(id):
-    plant_name = plants.get_plantName(id)
-    sun = plants.get_plantSun(id)
-    water = plants.get_plantWater(id)
-    comments = plants.getComment(id)
+    plant_name = plants.get_plant_name(id)
+    sun = plants.get_plant_sun(id)
+    water = plants.get_plant_water(id)
+    comments = plants.get_comment(id)
     return render_template("plant.html", id=id, plant_name=plant_name, sun=sun, water=water, comments=comments)
 
 
@@ -86,7 +86,7 @@ def result(id):
 def add():
     content = request.form["content"]
     plant_id = request.form["plant_id"]
-    if plants.addComment(content, plant_id):
+    if plants.add_comment(content, plant_id):
         return redirect("/plant/" + str(plant_id))
     else:
         return render_template("error.html", message="Kommentin lähetys ei onnistunut")
@@ -95,7 +95,7 @@ def add():
 @app.route("/remove", methods=["GET", "POST"])
 def remove():
     plant_id = request.form["plant_id"]
-    if plants.removePlant(plant_id):
+    if plants.remove_plant(plant_id):
         return redirect("/admin_page")
     else:
         return render_template("error.html", message="Kasvin poistaminen ei onnistunut")
