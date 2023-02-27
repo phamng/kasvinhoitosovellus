@@ -37,6 +37,14 @@ def send():
     else:
         return render_template("error.html", message="Viestin lähetys ei onnistunut")
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    name = request.form["search"]
+    if users.session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+    fetched_plants = plants.search(name)
+    return render_template("index.html", count=len(fetched_plants), plants=fetched_plants)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -46,12 +54,13 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         user_type = request.form["user_type"]
+        ##TODO: if user_type is not selected -> Do something
         if user_type == "user" and users.login(username, password):
             return redirect("/user_page")
         elif user_type == "administrator" and users.login(username, password):
             return redirect("/admin_page")
         else:
-            return render_template("error.html", message="Väärä tunnus tai salasana")
+            return render_template("welcome.html", error="Väärä tunnus tai salasana!")
 
 
 @app.route("/logout")
@@ -68,12 +77,18 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
+        if users.user_id() == 0:
+            return render_template("register.html", error="Käyttäjätunnus ei saatavilla!")
+        if users.contains_whitespace(username) is False or users.contains_whitespace(password1) is False:
+            return render_template("register.html", error="Käyttäjän nimi tai salasana ei ole kelvollinen!")
+        if len(username) < 3 or len(password1) < 3:
+            return render_template("register.html", error="Vähintään 3 merkkiä täytyy käyttää!")
         if password1 != password2:
-            return render_template("error.html", message="Salasanat eroavat")
-        elif users.register(username, password1):
+            return render_template("register.html", error="Salasanat eivät täsmää!")
+        if users.register(username, password1):
             return redirect("/")
         else:
-            return render_template("error.html", message="Rekisteröinti ei onnistunut")
+            return render_template("register.html", error="Rekisteröinti ei onnistunut!")
 
 
 @app.route("/plant/<int:id>")

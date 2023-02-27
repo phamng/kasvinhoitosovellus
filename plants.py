@@ -37,6 +37,13 @@ def send(plant_name, sun, water):
     db.session.commit()
     return True
 
+
+def search(plant_name):
+    sql = "SELECT id, plant_name, sun, water FROM plants WHERE plant_name LIKE :plant_name"
+    result = db.session.execute(sql, {"plant_name": "%" + str(plant_name) + "%"})
+    return result.fetchall()
+
+
 def add_comment(content, plant_id):
     sql = "INSERT INTO comments (content, plant_id) VALUES (:content, :plant_id)"
     db.session.execute(sql, {"content": content, "plant_id": plant_id})

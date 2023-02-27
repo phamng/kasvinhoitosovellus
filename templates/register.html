@@ -12,6 +12,9 @@
       padding: 50px;
     }
     </style>
+    {% if error %}
+<p id="error">{{error}}</p>
+{% endif %}
     <div class="row">
         <form action="/register" method="POST">
             <div class="form-group col-15">
