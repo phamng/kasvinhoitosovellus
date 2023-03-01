@@ -92,12 +92,21 @@ def register():
 
 
 @app.route("/plant/<int:id>")
-def result(id):
+def user_plant_details(id):
     plant_name = plants.get_plant_name(id)
     sun = plants.get_plant_sun(id)
     water = plants.get_plant_water(id)
     comments = plants.get_comment(id)
     return render_template("plant.html", id=id, plant_name=plant_name, sun=sun, water=water, comments=comments)
+
+
+@app.route("/plant2/<int:id>")
+def admin_plant_details(id):
+    plant_name = plants.get_plant_name(id)
+    sun = plants.get_plant_sun(id)
+    water = plants.get_plant_water(id)
+    comments = plants.get_comment(id)
+    return render_template("plant2.html", id=id, plant_name=plant_name, sun=sun, water=water, comments=comments)
 
 
 @app.route("/add", methods=["POST"])
@@ -113,8 +122,8 @@ def add():
         return render_template("error.html", message="Kommentin lähetys ei onnistunut")
 
 
-@app.route("/remove", methods=["GET", "POST"])
-def remove():
+@app.route("/remove_plant", methods=["GET", "POST"])
+def remove_plant():
     plant_id = request.form["plant_id"]
     if users.session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
@@ -122,3 +131,20 @@ def remove():
         return redirect("/admin_page")
     else:
         return render_template("error.html", message="Kasvin poistaminen ei onnistunut")
+
+
+@app.route("/remove_comment", methods=["GET", "POST"])
+def remove_comment():
+    content = request.form["content"]
+    plant_id = request.form["plant_id"]
+    if users.session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+    if plants.remove_comment(content, plant_id):
+        return redirect("/plant2/" + str(plant_id))
+    else:
+        return render_template("error.html", message="Kommentin poistaminen ei onnistunut")
+
+@app.route("/group")
+def group():
+   # myList = plants.get_groups()
+    return render_template("groups.html")

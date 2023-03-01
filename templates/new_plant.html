@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<h1>Lisää uusi kasvi</h1>
-
-<body>
-
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
     <form action="/send" method="POST">
         Nimi: <input type="text" name="plant_name"> <br>
 
@@ -25,6 +22,5 @@
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="reset" value="Nollaa">
     </form>
-<a href="/user_page">Takaisin etusivulle</a>
-</body>
-</html>
+</div>
+{% endblock %}

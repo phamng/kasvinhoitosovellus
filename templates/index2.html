@@ -1,35 +1,21 @@
-<!doctype html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <title>Etusivu</title>
-    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
-</head>
-
-<!--<style>body {background-color: #b0e0e6}</style>-->
+{% extends "base.html" %}
+{% block content %}
 <div class="container">
-    <div class="count">
-        <h1>Kasvien määrä: {{ count }}</h1>
-        <style> .count { padding: 9px; color: white; background-color: #396039;}</style>
-    </div>
-    <div class="form-group col-50">
-        <a href="/logout" class="logout">Kirjaudu ulos</a>
-        <a href="/user_page" class="new">Vaihda käyttäjän tilaan</a>
-        <style> .new, .logout { padding: 9px; color: white; background-color: #396039;}</style>
-    </div>
-    <form action="/remove", method="post">
+    Olet ylläpitäjä!<br>
+    <hr>
+    <form action="/remove_plant", method="post">
         <div class="plants">
             {% for plant in plants %}
             Nimi: {{ plant.plant_name }} <br>
             Valon määrä: {{ plant.sun }} <br>
             Veden määrä: {{ plant.water }} <br>
+            <a href="/plant2/{{ plant.id }}">Katso kaikki kommentit</a> <br>
             <input type="hidden" name="plant_id" value="{{ plant.id }}">
             <input type="submit" value="Poista"> <br>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <hr>
             {% endfor %}
-            <style> .plants { padding: 15px; background-color: #9fc69f;}</style>
         </div>
     </form>
 </div>
+{% endblock %}

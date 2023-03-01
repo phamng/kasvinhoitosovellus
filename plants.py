@@ -51,11 +51,22 @@ def add_comment(content, plant_id):
     return True
 
 
+def remove_comment(content, plant_id):
+    sql = "DELETE FROM comments WHERE content=:content AND plant_id=:plant_id"
+    db.session.execute(sql, {"content": content, "plant_id": plant_id})
+    db.session.commit()
+    return True
+
+
 def get_comment(id):
     sql = "SELECT C.content FROM comments C WHERE C.plant_id=:id"
     result = db.session.execute(sql, {"id": id})
     return result.fetchall()
 
+def get_comment_id(id):
+    sql = "SELECT C.id FROM comments C WHERE C.plant_id=:id"
+    result = db.session.execute(sql, {"id": id})
+    return result.fetchall()
 
 def remove_plant(id):
     sql1 = "DELETE FROM comments WHERE plant_id=:id"
@@ -65,3 +76,8 @@ def remove_plant(id):
     db.session.execute(sql2, {"id": id})
     db.session.commit()
     return True
+
+def get_groups():
+    sql = "SELECT id, name FROM groups"
+    result = db.session.execute(sql)
+    return result.fetchall()

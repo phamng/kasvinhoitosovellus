@@ -1,22 +1,25 @@
-Nimi: {{ plant_name }} <br>
-Aurinko: {{ sun }} <br>
-Vesi: {{ water }} <br>
-ID: {{ id }} <br>
-<hr>
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    Nimi: {{ plant_name }} <br>
+    Aurinko: {{ sun }} <br>
+    Vesi: {{ water }} <br>
+    <hr>
 
-{% for comment in comments %}
-<i>Kommentti:</i> {{ comment.content }}
-<p>
-    {% endfor %}
-<hr>
+    {% for comment in comments %}
+    <i>Kommentti:</i> {{ comment.content }}
+    <p>
+        {% endfor %}
 
-<form action="/add" method="post">
-    <p>Kommentti: <br>
-        <textarea name="content" rows="4" cols="50"></textarea>
-        <br>
-        <input type="submit" value="Lähetä">
-        <input type="hidden" name="plant_id" value="{{ id }}">
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
-<hr>
-<a href="/user_page">Takaisin etusivulle</a>
+
+    <form action="/add" method="post">
+        <p>Kommentti: <br>
+            <textarea name="content" rows="4" cols="50"></textarea>
+            <br>
+            <input type="submit" value="Lähetä">
+            <input type="hidden" name="plant_id" value="{{ id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
+    <hr>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+Nimi: {{ plant_name }} <br>
+Aurinko: {{ sun }} <br>
+Vesi: {{ water }} <br>
+
+<hr>
+    <form action="/remove_comment", method="post">
+        <div class="comments">
+            {% for comment in comments %}
+            {{ comment.content }}
+            <input type="hidden" name="content" value="{{ comment.content }}">
+            <input type="hidden" name="plant_id" value="{{ id }}">
+            <input type="submit" value="Poista"> <br>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <hr>
+            {% endfor %}
+        </div>
+    </form>
+</div>
+
+{% endblock %}
