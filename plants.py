@@ -77,7 +77,23 @@ def remove_plant(id):
     db.session.commit()
     return True
 
+
 def get_groups():
     sql = "SELECT id, name FROM groups"
     result = db.session.execute(sql)
     return result.fetchall()
+
+
+def get_like_count(plant_id):
+    sql = "SELECT COUNT(*) FROM likes WHERE plant_id=:plant_id"
+    result = db.session.execute(sql, {"plant_id": plant_id})
+    return result.fetchone()[0]
+
+
+def update_likes(user_id, plant_id):
+    sql = "INSERT INTO likes (user_id, plant_id) " \
+          "SELECT :user_id, :plant_id " \
+          "WHERE NOT EXISTS (SELECT user_id, plant_id FROM likes WHERE user_id=:user_id AND plant_id=:plant_id)"
+    db.session.execute(sql, {"user_id": user_id, "plant_id": plant_id})
+    db.session.commit()
+    return True

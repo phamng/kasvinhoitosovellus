@@ -77,8 +77,8 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
-        if users.user_id() == 0:
-            return render_template("register.html", error="Käyttäjätunnus ei saatavilla!")
+        # if users.user_id() == 0:
+        #     return render_template("register.html", error="Käyttäjätunnus ei saatavilla!")
         if users.contains_whitespace(username) is False or users.contains_whitespace(password1) is False:
             return render_template("register.html", error="Käyttäjän nimi tai salasana ei ole kelvollinen!")
         if len(username) < 3 or len(password1) < 3:
@@ -97,7 +97,8 @@ def user_plant_details(id):
     sun = plants.get_plant_sun(id)
     water = plants.get_plant_water(id)
     comments = plants.get_comment(id)
-    return render_template("plant.html", id=id, plant_name=plant_name, sun=sun, water=water, comments=comments)
+    like_count = plants.get_like_count(id)
+    return render_template("plant.html", id=id, plant_name=plant_name, sun=sun, water=water, comments=comments, count=like_count)
 
 
 @app.route("/plant2/<int:id>")
@@ -106,7 +107,8 @@ def admin_plant_details(id):
     sun = plants.get_plant_sun(id)
     water = plants.get_plant_water(id)
     comments = plants.get_comment(id)
-    return render_template("plant2.html", id=id, plant_name=plant_name, sun=sun, water=water, comments=comments)
+    like_count = plants.get_like_count(id)
+    return render_template("plant2.html", id=id, plant_name=plant_name, sun=sun, water=water, comments=comments, count=like_count)
 
 
 @app.route("/add", methods=["POST"])
@@ -117,6 +119,8 @@ def add():
         abort(403)
     if content != "":
         plants.add_comment(content, plant_id)
+        return redirect("/plant/" + str(plant_id))
+    if content == "":
         return redirect("/plant/" + str(plant_id))
     else:
         return render_template("error.html", message="Kommentin lähetys ei onnistunut")
@@ -148,3 +152,15 @@ def remove_comment():
 def group():
    # myList = plants.get_groups()
     return render_template("groups.html")
+
+
+@app.route("/like", methods=["GET", "POST"])
+def like():
+    plant_id = request.form["plant_id"]
+    user_id = users.user_id()
+    if users.session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+    if plants.update_likes(user_id, plant_id):
+        return redirect("/plant/" + str(plant_id))
+    else:
+        return render_template("error.html", message="Tykkääminen ei onnistunut")

@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-Nimi: {{ plant_name }} <br>
-Aurinko: {{ sun }} <br>
-Vesi: {{ water }} <br>
-
+    Nimi: {{ plant_name }} <br>
+    Aurinko: {{ sun }} <br>
+    Vesi: {{ water }} <br>
+    Tykkäysten määrä: {{ count }} <br>
 <hr>
     <form action="/remove_comment", method="post">
         <div class="comments">

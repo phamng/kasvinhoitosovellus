@@ -4,7 +4,12 @@
     Nimi: {{ plant_name }} <br>
     Aurinko: {{ sun }} <br>
     Vesi: {{ water }} <br>
-    <hr>
+    Tykkäysten määrä: {{ count }} <br>
+    <form action="/like" method="post">
+            <input type="submit" value="Tykkää">
+            <input type="hidden" name="plant_id" value="{{ id }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
 
     {% for comment in comments %}
     <i>Kommentti:</i> {{ comment.content }}
