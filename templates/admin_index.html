@@ -5,12 +5,12 @@
     <form action="/remove_plant", method="post">
         <div class="plants">
             {% for plant in plants %}
-            Nimi: {{ plant.plant_name }} <br>
-            Valon määrä: {{ plant.sun }} <br>
-            Veden määrä: {{ plant.water }} <br>
-            <a href="/plant2/{{ plant.id }}">Katso kaikki kommentit</a> <br>
+            <img src="static/images/plant.png" alt="plant_img" width="30" height="30"> {{ plant.plant_name }} <br>
+            <img src="static/images/sun.png" alt="sun_img" width="30" height="30"> {{ plant.sun }} <br>
+            <img src="static/images/water.png" alt="water_img" width="30" height="30"> {{ plant.water }} <br>
+            <a href="/plant2/{{ plant.id }}" class="link">Katso kaikki kommentit</a> <br>
             <input type="hidden" name="plant_id" value="{{ plant.id }}">
-            <input type="submit" value="Poista"> <br>
+            <button type="submit" class="btn">Poista</button>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <hr>
             {% endfor %}

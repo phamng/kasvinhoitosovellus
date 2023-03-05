@@ -3,16 +3,16 @@
 <div class="container">
     <form action="/add_group" method="post">
         <div class="group">
-            Ryhmän nimi: <textarea name="group_name" rows="1" cols="20"></textarea>
-            <input type="submit" value="Luo ryhmä">
+            Ryhmän nimi: <input type="text" id="group_name" name="group_name">
+            <button type="submit" class="btn">Luo ryhmä</button>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </div>
     </form>
     {% for group in groups %}
-    Nimi: {{ group.name }} <br>
-    <a href="/group/{{ group.id }}">Katso kaikki tähän ryhmään kuuluvat kasvit</a> <br> <br>
+    Ryhmä: {{ group.name }} <br>
+    <a href="/group/{{ group.id }}" class="link">Katso kasvit</a> <br> <br>
     <form action="/remove_group" method="post">
-            <input type="submit" value="Poista ryhmä">
+            <button type="submit" class="btn">Poista ryhmä</button>
             <input type="hidden" name="group_name" value="{{ group.name }}">
             <input type="hidden" name="group_id" value="{{ group.id }}">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">

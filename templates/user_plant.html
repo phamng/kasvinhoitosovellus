@@ -1,13 +1,13 @@
 {% extends "user_base.html" %}
 {% block content %}
 <div class="container">
-    Nimi: {{ plant_name }} <br>
-    Aurinko: {{ sun }} <br>
-    Vesi: {{ water }} <br><br>
+    <img src="../static/images/plant.png" alt="plant_img" width="30" height="30"> {{ plant_name }} <br>
+    <img src="../static/images/sun.png" alt="sun_img" width="30" height="30"> {{ sun }} <br>
+    <img src="../static/images/water.png" alt="water_img" width="30" height="30"> {{ water }} <br><br>
     Tykkäysten määrä: {{ count }} <br>
 
     <form action="/like" method="post">
-        <input type="submit" value="Tykkää">
+        <button type="submit" class="btn">Tykkää</button>
         <input type="hidden" name="plant_id" value="{{ id }}">
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
@@ -15,14 +15,15 @@
     {% for comment in comments %}
     <i>Kommentti:</i> {{ comment.content }}
     <p>
-        {% endfor %}
-
+    {% endfor %}
+    <br>
 
     <form action="/add" method="post">
-        <p>Kommentti: <br>
-            <textarea name="content" rows="4" cols="50"></textarea>
-            <br>
-            <input type="submit" value="Lähetä">
+            <div class="form-group col-15">
+                <label for="comment">Kommentti</label> <br>
+                <input type="text" class="comment" id="comment" name="comment">
+            </div>
+            <button type="submit" class="btn">Lähetä</button>
             <input type="hidden" name="plant_id" value="{{ id }}">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>

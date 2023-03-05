@@ -1,3 +1,27 @@
 body {
-  background-color: #F5F5DC;
+    background-color: #FAEBD7;
+}
+
+.nav-link {
+    color: blue
+}
+
+.btn {
+    padding: 4px;
+    color: black;
+    background-color: #e9a449
+}
+
+.comment {
+    width: 500px;
+    height: 120px
+}
+
+.form-control {
+    width: 300px;
+    height: 30px
+}
+
+.link {
+    color: #804600;
 }

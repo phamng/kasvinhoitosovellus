@@ -3,18 +3,18 @@
 <div class="container">
     <form action="/search" method="post">
         <div class="plants">
-            <textarea name="search" rows="1" cols="40"></textarea>
-            <input type="submit" value="Hae">
+            <input type="text" id="plant" name="plant">
+            <button type="submit" class="btn">Hae kasvi</button>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </div>
     </form>
     <form action="/add_new_plant" , method="post">
         <div class="plants">
             {% for plant in plants %}
-            Nimi: {{ plant.plant_name }} <br>
-            Valon määrä: {{ plant.sun }} <br>
-            Veden määrä: {{ plant.water }} <br>
-            <a href="/plant/{{ plant.id }}">Katso kaikki kommentit</a> <br>
+            <img src="static/images/plant.png" alt="plant_img" width="30" height="30"> {{ plant.plant_name }} <br>
+            <img src="static/images/sun.png" alt="sun_img" width="30" height="30"> {{ plant.sun }} <br>
+            <img src="static/images/water.png" alt="water_img" width="30" height="30"> {{ plant.water }} <br>
+            <a href="/plant/{{ plant.id }}" class="link">Katso kaikki kommentit</a> <br>
             <hr>
             {% endfor %}
         </div>

@@ -1,9 +1,9 @@
 {% extends "admin_base.html" %}
 {% block content %}
 <div class="container">
-    Nimi: {{ plant_name }} <br>
-    Aurinko: {{ sun }} <br>
-    Vesi: {{ water }} <br>
+    <img src="../static/images/plant.png" alt="plant_img" width="30" height="30"> {{ plant_name }} <br>
+    <img src="../static/images/sun.png" alt="sun_img" width="30" height="30"> {{ sun }} <br>
+    <img src="../static/images/water.png" alt="water_img" width="30" height="30"> {{ water }} <br><br>
     Tykkäysten määrä: {{ count }} <br>
 <hr>
     <form action="/remove_comment", method="post">
@@ -12,7 +12,7 @@
             {{ comment.content }}
             <input type="hidden" name="content" value="{{ comment.content }}">
             <input type="hidden" name="plant_id" value="{{ id }}">
-            <input type="submit" value="Poista"> <br>
+            <button type="submit" class="btn">Poista</button>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <hr>
             {% endfor %}

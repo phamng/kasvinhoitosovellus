@@ -2,25 +2,26 @@
 {% block content %}
 <div class="container">
     <form action="/add_new_plant" method="POST">
-        Nimi: <input type="text" name="plant_name"> <br>
+        <img src="static/images/plant.png" alt="img" width="30" height="30">
+        <input type="text" class="new_plant" name="plant_name"><br> <br>
 
-        Valon määrä:
+        <img src="static/images/sun.png" alt="img" width="30" height="30">
         <input type="radio" name="sun" value="Erittäin vähän"> Erittäin vähän
         <input type="radio" name="sun" value="Vähän"> Vähän
         <input type="radio" name="sun" value="Keskimäärin"> Keskimäärin
         <input type="radio" name="sun" value="Paljon"> Paljon
-        <input type="radio" name="sun" value="Erittäin paljon"> Erittäin paljon <br>
+        <input type="radio" name="sun" value="Erittäin paljon"> Erittäin paljon <br> <br>
 
-        Veden määrä:
+        <img src="static/images/water.png" alt="img" width="30" height="30">
         <input type="radio" name="water" value="Erittäin vähän"> Erittäin vähän
         <input type="radio" name="water" value="Vähän"> Vähän
         <input type="radio" name="water" value="Keskimäärin"> Keskimäärin
         <input type="radio" name="water" value="Paljon"> Paljon
-        <input type="radio" name="water" value="Erittäin paljon"> Erittäin paljon <br>
+        <input type="radio" name="water" value="Erittäin paljon"> Erittäin paljon <br> <br>
 
-        <input type="submit" value="Lisää uusi kasvi">
+        <button type="submit" class="btn">Lisää uusi kasvi</button>
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <input type="reset" value="Nollaa">
+        <button type="reset" class="btn">Nollaa</button>
     </form>
 </div>
 {% endblock %}

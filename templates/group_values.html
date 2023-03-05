@@ -4,8 +4,9 @@
     {{ group_name }}
     <form action="/add_to_groups" method="post">
         <div class="plants">
-            Kasvin nimi: <textarea name="plant_name" rows="1" cols="30"></textarea>
-            <input type="submit" value="Lisää ryhmään">
+            <img src="../static/images/plant.png" alt="plant_img" width="30" height="30">
+            <input type="text" id="plant_name" name="plant_name">
+            <button type="submit" class="btn">Lisää ryhmään</button>
             <input type="hidden" name="plant_name" value="{{ plant_name }}">
             <input type="hidden" name="group_id" value="{{ id }}">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
@@ -16,8 +17,9 @@
     <p id="error">{{error}}</p>
     {% endif %}
 
+    Tähän ryhmään kuuluvat kasvit: <br>
     {% for value in value_list %}
-    <i>Nimi:</i> {{ value.plant_name }} <br>
+    <img src="../static/images/plant.png" alt="plant_img" width="30" height="30"> {{ value.plant_name }} <br>
     {% endfor %}
 </div>
 {% endblock %}
