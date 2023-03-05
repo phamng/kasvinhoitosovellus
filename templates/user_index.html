@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "user_base.html" %}
 {% block content %}
 <div class="container">
     <form action="/search" method="post">
@@ -8,7 +8,7 @@
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </div>
     </form>
-    <form action="/send" , method="post">
+    <form action="/add_new_plant" , method="post">
         <div class="plants">
             {% for plant in plants %}
             Nimi: {{ plant.plant_name }} <br>

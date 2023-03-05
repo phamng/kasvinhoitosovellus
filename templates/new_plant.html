@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+{% extends "user_base.html" %}
 {% block content %}
 <div class="container">
-    <form action="/send" method="POST">
+    <form action="/add_new_plant" method="POST">
         Nimi: <input type="text" name="plant_name"> <br>
 
         Valon määrä:
@@ -18,7 +18,7 @@
         <input type="radio" name="water" value="Paljon"> Paljon
         <input type="radio" name="water" value="Erittäin paljon"> Erittäin paljon <br>
 
-        <input type="submit" value="Lähetä">
+        <input type="submit" value="Lisää uusi kasvi">
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="reset" value="Nollaa">
     </form>

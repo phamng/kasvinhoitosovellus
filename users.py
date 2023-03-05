@@ -41,9 +41,8 @@ def contains_whitespace(str):
     if " " in str:
         return False
 
-def username_used(username):
-    sql = "SELECT username FROM users WHERE username=:username RETURNING id"
-    result = db.session.execute(sql, {"username": username})
 
-    if id is None:
-        return True
+def get_username(username):
+    sql = "SELECT id FROM users WHERE username=:username"
+    result = db.session.execute(sql, {"username": username})
+    return result.fetchone()[0]

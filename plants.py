@@ -4,7 +4,7 @@ from flask import session
 import users
 
 
-def get_list():
+def get_plant_list():
     sql = "SELECT P.id, P.plant_name, P.sun, P.water FROM plants P"
     result = db.session.execute(sql)
     return result.fetchall()
@@ -15,6 +15,10 @@ def get_plant_name(id):
     result = db.session.execute(sql, {"id": id})
     return result.fetchone()[0]
 
+def get_plant_id_by_name(name):
+    sql = "SELECT id FROM plants WHERE plant_name=:plant_name"
+    result = db.session.execute(sql, {"plant_name": name})
+    return result.fetchone()[0]
 
 def get_plant_sun(id):
     sql = "SELECT sun FROM plants WHERE id=:id"
@@ -28,7 +32,7 @@ def get_plant_water(id):
     return result.fetchone()[0]
 
 
-def send(plant_name, sun, water):
+def add_new_plant(plant_name, sun, water):
     user_id = users.user_id()
     if user_id == 0:
         return False
@@ -76,12 +80,6 @@ def remove_plant(id):
     db.session.execute(sql2, {"id": id})
     db.session.commit()
     return True
-
-
-def get_groups():
-    sql = "SELECT id, name FROM groups"
-    result = db.session.execute(sql)
-    return result.fetchall()
 
 
 def get_like_count(plant_id):

@@ -1,14 +1,15 @@
-{% extends "base.html" %}
+{% extends "user_base.html" %}
 {% block content %}
 <div class="container">
     Nimi: {{ plant_name }} <br>
     Aurinko: {{ sun }} <br>
-    Vesi: {{ water }} <br>
+    Vesi: {{ water }} <br><br>
     Tykkäysten määrä: {{ count }} <br>
+
     <form action="/like" method="post">
-            <input type="submit" value="Tykkää">
-            <input type="hidden" name="plant_id" value="{{ id }}">
-            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <input type="submit" value="Tykkää">
+        <input type="hidden" name="plant_id" value="{{ id }}">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
 
     {% for comment in comments %}
